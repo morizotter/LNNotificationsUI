@@ -119,14 +119,14 @@ static const CGFloat LNNotificationViewHeight = 68.0;
 		
 		[vc.view addSubview:_swipeView];
 		[vc.view sendSubviewToBack:_swipeView];
-		
+
+        _tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_userTappedNotification)];
+        [_swipeView addGestureRecognizer:_tgr];
+
 		_sgr = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(_dismissFromSwipe)];
 		_sgr.direction = UISwipeGestureRecognizerDirectionUp;
+        [_sgr requireGestureRecognizerToFail:_tgr];
 		[_swipeView addGestureRecognizer:_sgr];
-		
-		_tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_userTappedNotification)];
-		[_tgr requireGestureRecognizerToFail:_sgr];
-		[_swipeView addGestureRecognizer:_tgr];
 		
 		[vc.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_swipeView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_swipeView)]];
 		[vc.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_swipeView(68)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_swipeView)]];
