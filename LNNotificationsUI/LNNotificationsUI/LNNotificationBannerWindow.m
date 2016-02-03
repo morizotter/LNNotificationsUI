@@ -125,6 +125,7 @@ static const CGFloat LNNotificationViewHeight = 68.0;
 
 		_sgr = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(_dismissFromSwipe)];
 		_sgr.direction = UISwipeGestureRecognizerDirectionUp;
+        [_sgr requireGestureRecognizerToFail:_tgr];
 		[_swipeView addGestureRecognizer:_sgr];
 		
 		[vc.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_swipeView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_swipeView)]];
